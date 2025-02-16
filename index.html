@@ -15,9 +15,9 @@
             padding: 0;
         }
         header {
-            background-color: rgba(255, 255, 255, 0.8);
             padding: 10px;
             font-size: 14px;
+            background-color: transparent; /* Αφαίρεση σκίασης */
         }
         h1 {
             font-size: 36px;
@@ -104,6 +104,12 @@
             flex-wrap: wrap;
             margin-top: 20px;
         }
+        .instructions {
+            font-weight: bold;
+            color: #D4AF37; /* Χρυσό χρώμα */
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -130,6 +136,7 @@
     </div>
 
     <div id="quiz1" class="popup">
+        <div class="instructions">📖 Διάβασε προσεκτικά το παρακάτω κείμενο και προσπάθησε να συγκρατήσεις όσες περισσότερες λεπτομέρειες στο χρόνο που σου δίνεται. Μπορείς να κρατάς σημειώσεις! ✍️</div>
         <p>Ο Λοιμός της Αθήνας ξέσπασε το 430 π.Χ., κατά τη διάρκεια του Πελοποννησιακού Πολέμου, και προκάλεσε τον θάνατο χιλιάδων κατοίκων. Σύμφωνα με τον ιστορικό Θουκυδίδη, η ασθένεια προήλθε από την Αφρική και εξαπλώθηκε γρήγορα λόγω του συνωστισμού στην πόλη. Οι Σπαρτιάτες, βλέποντας την καταστροφή, αποφάσισαν να μην πλησιάσουν. Ο ίδιος ο Περικλής, ο μεγάλος ηγέτης της Αθήνας, υπέκυψε στον λοιμό. Η πόλη βίωσε μεγάλη κοινωνική και πολιτική κρίση λόγω της απώλειας σημαντικών πολιτών.</p>
         <div class="countdown" id="countdown1"></div>
         <div class="question" id="q1_1" style="display:none;">
@@ -154,11 +161,11 @@
 
     <div id="end" class="popup">
         <img src="end.png" alt="End Image">
-        <p style="font-family: 'Comic Sans MS', cursive; font-weight: bold; color: white;">Λύσατε το μυστήριο και γλυτώσατε το θάνατο!</p>
+        <p style="font-family: 'Comic Sans MS', cursive; font-weight: bold; color: white;">🎉 Λύσατε το μυστήριο και γλυτώσατε το θάνατο! 🎉</p>
     </div>
 
     <div id="fail" class="popup">
-        <p style="font-family: 'Comic Sans MS', cursive; font-weight: bold; color: red;">Δυστυχώς αποτύχατε! Είστε καταδικασμένοι/ες σε θάνατο!</p>
+        <p style="font-family: 'Comic Sans MS', cursive; font-weight: bold; color: red;">😢 Δυστυχώς αποτύχατε! Είστε καταδικασμένοι/ες σε θάνατο! 💀</p>
     </div>
 
     <script>
@@ -181,13 +188,13 @@
         }
 
         function startCountdown(quizNumber) {
-            let timeLeft = 45; // Μειώσαμε τον χρόνο στα 45 δευτερόλεπτα
+            let timeLeft = 30; // Χρόνος μειώθηκε στα 30 δευτερόλεπτα
             const countdownElement = document.getElementById('countdown' + quizNumber);
-            countdownElement.textContent = `Απομένουν: ${timeLeft} δευτερόλεπτα`;
+            countdownElement.textContent = `⏳ Απομένουν: ${timeLeft} δευτερόλεπτα`;
 
             const countdownInterval = setInterval(() => {
                 timeLeft--;
-                countdownElement.textContent = `Απομένουν: ${timeLeft} δευτερόλεπτα`;
+                countdownElement.textContent = `⏳ Απομένουν: ${timeLeft} δευτερόλεπτα`;
                 if (timeLeft <= 0) {
                     clearInterval(countdownInterval);
                     countdownElement.textContent = '';
