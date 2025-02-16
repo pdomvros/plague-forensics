@@ -209,7 +209,8 @@
 
             setTimeout(() => {
                 question.style.display = 'none';
-                const nextQuestion = document.getElementById('q' + questionId.replace(/_(\d+)/, '_' + (parseInt(questionId.split('_')[1]) + 1));
+                const nextQuestionId = questionId.replace(/_(\d+)/, '_' + (parseInt(questionId.split('_')[1]) + 1));
+                const nextQuestion = document.getElementById('q' + nextQuestionId);
                 if (nextQuestion) {
                     nextQuestion.style.display = 'block';
                 } else {
