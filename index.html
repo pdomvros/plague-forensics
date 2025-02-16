@@ -61,11 +61,13 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             z-index: 1000;
-            border-radius: 10px;
+            border-radius: 15px;
             text-align: center;
+            width: 80%;
+            max-width: 600px;
         }
         .popup img {
             max-width: 100%;
@@ -75,14 +77,15 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px;
-            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
             font-size: 24px;
             font-weight: bold;
+            border: 2px solid #333;
         }
         .question {
-            margin: 10px 0;
+            margin: 15px 0;
         }
         .correct {
             color: green;
@@ -91,8 +94,15 @@
             color: red;
         }
         .countdown {
-            font-size: 18px;
-            margin-top: 10px;
+            font-size: 20px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -103,12 +113,14 @@
     <h1>Ο Λοιμός της Αρχαίας Αθήνας</h1>
 
     <button id="sendButton" class="button" onclick="showPopup('intro')">Αποστολή</button>
-    <br>
-    <button id="element1" class="button" onclick="startQuiz('1')">Στοιχείο 1</button>
-    <button id="element2" class="button" onclick="startQuiz('2')">Στοιχείο 2</button>
-    <button id="element3" class="button" onclick="startQuiz('3')">Στοιχείο 3</button>
-    <button id="element4" class="button" onclick="startQuiz('4')">Στοιχείο 4</button>
-    <button id="element5" class="button" onclick="startQuiz('5')">Στοιχείο 5</button>
+
+    <div class="button-container">
+        <button id="element1" class="button" onclick="startQuiz('1')">Στοιχείο 1</button>
+        <button id="element2" class="button" onclick="startQuiz('2')">Στοιχείο 2</button>
+        <button id="element3" class="button" onclick="startQuiz('3')">Στοιχείο 3</button>
+        <button id="element4" class="button" onclick="startQuiz('4')">Στοιχείο 4</button>
+        <button id="element5" class="button" onclick="startQuiz('5')">Στοιχείο 5</button>
+    </div>
 
     <div class="scoreboard" id="scoreboard">Σκορ: 0</div>
 
@@ -169,7 +181,7 @@
         }
 
         function startCountdown(quizNumber) {
-            let timeLeft = 90;
+            let timeLeft = 45; // Μειώσαμε τον χρόνο στα 45 δευτερόλεπτα
             const countdownElement = document.getElementById('countdown' + quizNumber);
             countdownElement.textContent = `Απομένουν: ${timeLeft} δευτερόλεπτα`;
 
@@ -197,7 +209,7 @@
 
             setTimeout(() => {
                 question.style.display = 'none';
-                const nextQuestion = document.getElementById('q' + questionId.replace(/_(\d+)/, '_' + (parseInt(questionId.split('_')[1]) + 1)));
+                const nextQuestion = document.getElementById('q' + questionId.replace(/_(\d+)/, '_' + (parseInt(questionId.split('_')[1]) + 1));
                 if (nextQuestion) {
                     nextQuestion.style.display = 'block';
                 } else {
