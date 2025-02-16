@@ -29,13 +29,30 @@
             padding: 15px 30px;
             font-size: 18px;
             color: white;
-            background-color: #4CAF50;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
+        #sendButton {
+            background-color: #FF5733;
+        }
+        #element1 {
+            background-color: #4CAF50;
+        }
+        #element2 {
+            background-color: #2196F3;
+        }
+        #element3 {
+            background-color: #9C27B0;
+        }
+        #element4 {
+            background-color: #FFC107;
+        }
+        #element5 {
+            background-color: #E91E63;
+        }
         .button:hover {
-            background-color: #45a049;
+            opacity: 0.8;
         }
         .popup {
             display: none;
@@ -55,7 +72,12 @@
             height: auto;
         }
         .scoreboard {
-            margin-top: 20px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
             font-size: 24px;
             font-weight: bold;
         }
@@ -68,6 +90,10 @@
         .incorrect {
             color: red;
         }
+        .countdown {
+            font-size: 18px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -76,12 +102,13 @@
     </header>
     <h1>Ο Λοιμός της Αρχαίας Αθήνας</h1>
 
-    <button class="button" onclick="showPopup('intro')">Αποστολή</button>
-    <button class="button" onclick="startQuiz('1')">Στοιχείο 1</button>
-    <button class="button" onclick="startQuiz('2')">Στοιχείο 2</button>
-    <button class="button" onclick="startQuiz('3')">Στοιχείο 3</button>
-    <button class="button" onclick="startQuiz('4')">Στοιχείο 4</button>
-    <button class="button" onclick="startQuiz('5')">Στοιχείο 5</button>
+    <button id="sendButton" class="button" onclick="showPopup('intro')">Αποστολή</button>
+    <br>
+    <button id="element1" class="button" onclick="startQuiz('1')">Στοιχείο 1</button>
+    <button id="element2" class="button" onclick="startQuiz('2')">Στοιχείο 2</button>
+    <button id="element3" class="button" onclick="startQuiz('3')">Στοιχείο 3</button>
+    <button id="element4" class="button" onclick="startQuiz('4')">Στοιχείο 4</button>
+    <button id="element5" class="button" onclick="startQuiz('5')">Στοιχείο 5</button>
 
     <div class="scoreboard" id="scoreboard">Σκορ: 0</div>
 
@@ -92,7 +119,8 @@
 
     <div id="quiz1" class="popup">
         <p>Ο Λοιμός της Αθήνας ξέσπασε το 430 π.Χ., κατά τη διάρκεια του Πελοποννησιακού Πολέμου, και προκάλεσε τον θάνατο χιλιάδων κατοίκων. Σύμφωνα με τον ιστορικό Θουκυδίδη, η ασθένεια προήλθε από την Αφρική και εξαπλώθηκε γρήγορα λόγω του συνωστισμού στην πόλη. Οι Σπαρτιάτες, βλέποντας την καταστροφή, αποφάσισαν να μην πλησιάσουν. Ο ίδιος ο Περικλής, ο μεγάλος ηγέτης της Αθήνας, υπέκυψε στον λοιμό. Η πόλη βίωσε μεγάλη κοινωνική και πολιτική κρίση λόγω της απώλειας σημαντικών πολιτών.</p>
-        <div class="question" id="q1_1">
+        <div class="countdown" id="countdown1"></div>
+        <div class="question" id="q1_1" style="display:none;">
             <p>1. Ο Λοιμός της Αθήνας ξέσπασε μετά το τέλος του Πελοποννησιακού Πολέμου.</p>
             <button onclick="checkAnswer('1_1', false)">Λάθος</button>
         </div>
@@ -124,6 +152,8 @@
     <script>
         let score = 0;
         const scoreboard = document.getElementById('scoreboard');
+        let totalQuestions = 0;
+        let answeredQuestions = 0;
 
         function showPopup(id) {
             document.getElementById(id).style.display = 'block';
@@ -135,9 +165,23 @@
 
         function startQuiz(quizNumber) {
             showPopup('quiz' + quizNumber);
-            setTimeout(() => {
-                document.getElementById('q' + quizNumber + '_1').style.display = 'block';
-            }, 100);
+            startCountdown(quizNumber);
+        }
+
+        function startCountdown(quizNumber) {
+            let timeLeft = 90;
+            const countdownElement = document.getElementById('countdown' + quizNumber);
+            countdownElement.textContent = `Απομένουν: ${timeLeft} δευτερόλεπτα`;
+
+            const countdownInterval = setInterval(() => {
+                timeLeft--;
+                countdownElement.textContent = `Απομένουν: ${timeLeft} δευτερόλεπτα`;
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.textContent = '';
+                    document.getElementById('q' + quizNumber + '_1').style.display = 'block';
+                }
+            }, 1000);
         }
 
         function checkAnswer(questionId, isCorrect) {
@@ -149,6 +193,8 @@
                 question.innerHTML += ' <span class="incorrect">✗</span>';
             }
             scoreboard.textContent = 'Σκορ: ' + score;
+            answeredQuestions++;
+
             setTimeout(() => {
                 question.style.display = 'none';
                 const nextQuestion = document.getElementById('q' + questionId.replace(/_(\d+)/, '_' + (parseInt(questionId.split('_')[1]) + 1)));
@@ -156,14 +202,23 @@
                     nextQuestion.style.display = 'block';
                 } else {
                     closePopup('quiz' + questionId.split('_')[0]);
-                    if (score > 10) {
-                        showPopup('end');
-                    } else {
-                        showPopup('fail');
+                    if (answeredQuestions === totalQuestions) {
+                        showFinalMessage();
                     }
                 }
             }, 1000);
         }
+
+        function showFinalMessage() {
+            if (score > 10) {
+                showPopup('end');
+            } else {
+                showPopup('fail');
+            }
+        }
+
+        // Calculate total questions
+        totalQuestions = document.querySelectorAll('.question').length;
     </script>
 </body>
 </html>
