@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ο Λοιμός της Αρχαίας Αθήνας (Ancient Forensics)</title>
+    <title>Ο Λοιμός της Αρχαίας Αθήνας</title>
     <style>
         body {
             background-image: url('background-soft.png');
@@ -20,13 +20,23 @@
             background-color: transparent; /* Αφαίρεση σκίασης */
         }
         h1 {
+            font-family: 'Comic Sans MS', cursive;
             font-size: 36px;
             margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 24px;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
         }
         .button {
             display: inline-block;
             margin: 10px;
             padding: 15px 30px;
+            font-family: 'Comic Sans MS', cursive;
             font-size: 18px;
             color: white;
             border: none;
@@ -140,6 +150,7 @@
         Δημιουργία: Παναγιώτης Δόμβρος 2025 (CC BY-NC)
     </header>
     <h1>Ο Λοιμός της Αρχαίας Αθήνας</h1>
+    <div class="subtitle">Ancient Forensics</div>
 
     <button id="sendButton" class="button" onclick="showPopup('intro')">Αποστολή</button>
     <button id="resultButton" class="button" onclick="showFinalMessage()">Αποτέλεσμα Έρευνας</button>
@@ -337,7 +348,7 @@
     <!-- Τελικά μηνύματα -->
     <div id="end" class="popup">
         <img src="end.png" alt="End Image">
-        <p style="font-family: 'Comic Sans MS', cursive; font-weight: bold; color: white;">🎉 Λύσατε το μυστήριο και γλυτώσατε το θάνατο! 🎉</p>
+        <p style="font-family: 'Comic Sans MS', cursive; font-weight: bold; color: green;">🎉 Λύσατε το μυστήριο και γλυτώσατε το θάνατο! 🎉</p>
     </div>
 
     <div id="fail" class="popup">
