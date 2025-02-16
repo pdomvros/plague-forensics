@@ -36,6 +36,9 @@
         #sendButton {
             background-color: #FF5733;
         }
+        #resultButton {
+            background-color: #D4AF37; /* Χρυσό χρώμα */
+        }
         #element1 {
             background-color: #4CAF50;
         }
@@ -110,6 +113,26 @@
             font-size: 18px;
             margin-bottom: 20px;
         }
+        .answer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .answer-buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .answer-buttons button.correct {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .answer-buttons button.incorrect {
+            background-color: #E91E63;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -119,6 +142,7 @@
     <h1>Ο Λοιμός της Αρχαίας Αθήνας</h1>
 
     <button id="sendButton" class="button" onclick="showPopup('intro')">Αποστολή</button>
+    <button id="resultButton" class="button" onclick="showFinalMessage()">Αποτέλεσμα Έρευνας</button>
 
     <div class="button-container">
         <button id="element1" class="button" onclick="startQuiz('1')">Στοιχείο 1</button>
@@ -135,30 +159,182 @@
         <button onclick="closePopup('intro')">Κλείσιμο</button>
     </div>
 
+    <!-- Στοιχείο 1 -->
     <div id="quiz1" class="popup">
         <div class="instructions">📖 Διάβασε προσεκτικά το παρακάτω κείμενο και προσπάθησε να συγκρατήσεις όσες περισσότερες λεπτομέρειες στο χρόνο που σου δίνεται. Μπορείς να κρατάς σημειώσεις! ✍️</div>
-        <p>Ο Λοιμός της Αθήνας ξέσπασε το 430 π.Χ., κατά τη διάρκεια του Πελοποννησιακού Πολέμου, και προκάλεσε τον θάνατο χιλιάδων κατοίκων. Σύμφωνα με τον ιστορικό Θουκυδίδη, η ασθένεια προήλθε από την Αφρική και εξαπλώθηκε γρήγορα λόγω του συνωστισμού στην πόλη. Οι Σπαρτιάτες, βλέποντας την καταστροφή, αποφάσισαν να μην πλησιάσουν. Ο ίδιος ο Περικλής, ο μεγάλος ηγέτης της Αθήνας, υπέκυψε στον λοιμό. Η πόλη βίωσε μεγάλη κοινωνική και πολιτική κρίση λόγω της απώλειας σημαντικών πολιτών.</p>
+        <p id="text1">Ο Λοιμός της Αθήνας ξέσπασε το 430 π.Χ., κατά τη διάρκεια του Πελοποννησιακού Πολέμου, και προκάλεσε τον θάνατο χιλιάδων κατοίκων. Σύμφωνα με τον ιστορικό Θουκυδίδη, η ασθένεια προήλθε από την Αφρική και εξαπλώθηκε γρήγορα λόγω του συνωστισμού στην πόλη. Οι Σπαρτιάτες, βλέποντας την καταστροφή, αποφάσισαν να μην πλησιάσουν. Ο ίδιος ο Περικλής, ο μεγάλος ηγέτης της Αθήνας, υπέκυψε στον λοιμό. Η πόλη βίωσε μεγάλη κοινωνική και πολιτική κρίση λόγω της απώλειας σημαντικών πολιτών.</p>
         <div class="countdown" id="countdown1"></div>
         <div class="question" id="q1_1" style="display:none;">
             <p>1. Ο Λοιμός της Αθήνας ξέσπασε μετά το τέλος του Πελοποννησιακού Πολέμου.</p>
-            <button onclick="checkAnswer('1_1', false)">Λάθος</button>
+            <div class="answer-buttons">
+                <button class="incorrect" onclick="checkAnswer('1_1', false)">Σωστό</button>
+                <button class="correct" onclick="checkAnswer('1_1', true)">Λάθος</button>
+            </div>
         </div>
         <div class="question" id="q1_2" style="display:none;">
             <p>2. Ο Θουκυδίδης κατέγραψε λεπτομερώς τα συμπτώματα της ασθένειας.</p>
-            <button onclick="checkAnswer('1_2', true)">Σωστό</button>
+            <div class="answer-buttons">
+                <button class="correct" onclick="checkAnswer('1_2', true)">Σωστό</button>
+                <button class="incorrect" onclick="checkAnswer('1_2', false)">Λάθος</button>
+            </div>
         </div>
         <div class="question" id="q1_3" style="display:none;">
             <p>3. Ο Περικλής επέζησε του λοιμού και ηγήθηκε της Αθήνας για πολλά χρόνια μετά.</p>
-            <button onclick="checkAnswer('1_3', false)">Λάθος</button>
+            <div class="answer-buttons">
+                <button class="incorrect" onclick="checkAnswer('1_3', false)">Σωστό</button>
+                <button class="correct" onclick="checkAnswer('1_3', true)">Λάθος</button>
+            </div>
         </div>
         <div class="question" id="q1_4" style="display:none;">
             <p>4. Οι Σπαρτιάτες δεν μπήκαν στην Αθήνα λόγω του φόβου της ασθένειας.</p>
-            <button onclick="checkAnswer('1_4', true)">Σωστό</button>
+            <div class="answer-buttons">
+                <button class="correct" onclick="checkAnswer('1_4', true)">Σωστό</button>
+                <button class="incorrect" onclick="checkAnswer('1_4', false)">Λάθος</button>
+            </div>
         </div>
     </div>
 
-    <!-- Repeat similar structure for quiz2, quiz3, quiz4, quiz5 -->
+    <!-- Στοιχείο 2 -->
+    <div id="quiz2" class="popup">
+        <div class="instructions">📖 Διάβασε προσεκτικά το παρακάτω κείμενο και προσπάθησε να συγκρατήσεις όσες περισσότερες λεπτομέρειες στο χρόνο που σου δίνεται. Μπορείς να κρατάς σημειώσεις! ✍️</div>
+        <p id="text2">Ο Θουκυδίδης περιέγραψε τα συμπτώματα της ασθένειας που έπληξε την Αθήνα. Οι ασθενείς εμφάνιζαν υψηλό πυρετό, φλεγμονές στα μάτια, εσωτερική καύση, στομαχικούς πόνους και αδιάκοπη δίψα. Σε προχωρημένο στάδιο, πολλοί υπέφεραν από αμνησία ή τυφλότητα. Το δέρμα τους παρουσίαζε εξανθήματα και έλκη, ενώ ο θάνατος επερχόταν γρήγορα. Όσοι επιβίωναν, συχνά έχαναν μόνιμα την υγεία τους.</p>
+        <div class="countdown" id="countdown2"></div>
+        <div class="question" id="q2_1" style="display:none;">
+            <p>1. Ο λοιμός επηρέαζε μόνο τους ηλικιωμένους και τα παιδιά.</p>
+            <div class="answer-buttons">
+                <button class="incorrect" onclick="checkAnswer('2_1', false)">Σωστό</button>
+                <button class="correct" onclick="checkAnswer('2_1', true)">Λάθος</button>
+            </div>
+        </div>
+        <div class="question" id="q2_2" style="display:none;">
+            <p>2. Οι ασθενείς ένιωθαν έντονη εσωτερική καύση.</p>
+            <div class="answer-buttons">
+                <button class="correct" onclick="checkAnswer('2_2', true)">Σωστό</button>
+                <button class="incorrect" onclick="checkAnswer('2_2', false)">Λάθος</button>
+            </div>
+        </div>
+        <div class="question" id="q2_3" style="display:none;">
+            <p>3. Μερικοί άνθρωποι έχαναν την όρασή τους εξαιτίας της νόσου.</p>
+            <div class="answer-buttons">
+                <button class="correct" onclick="checkAnswer('2_3', true)">Σωστό</button>
+                <button class="incorrect" onclick="checkAnswer('2_3', false)">Λάθος</button>
+            </div>
+        </div>
+        <div class="question" id="q2_4" style="display:none;">
+            <p>4. Η ασθένεια είχε ήπια συμπτώματα και σπάνια οδηγούσε σε θάνατο.</p>
+            <div class="answer-buttons">
+                <button class="incorrect" onclick="checkAnswer('2_4', false)">Σωστό</button>
+                <button class="correct" onclick="checkAnswer('2_4', true)">Λάθος</button>
+            </div>
+        </div>
+    </div>
 
+    <!-- Στοιχείο 3 -->
+    <div id="quiz3" class="popup">
+        <div class="instructions">📖 Διάβασε προσεκτικά το παρακάτω κείμενο και προσπάθησε να συγκρατήσεις όσες περισσότερες λεπτομέρειες στο χρόνο που σου δίνεται. Μπορείς να κρατάς σημειώσεις! ✍️</div>
+        <p id="text3">Ο λοιμός προκάλεσε σοβαρή κρίση στην κοινωνία της Αθήνας. Οι άνθρωποι έχασαν την πίστη τους στους θεούς, καθώς οι προσευχές δεν έφερναν αποτέλεσμα. Υπήρξε κοινωνική κατάρρευση, με πολλούς να αγνοούν τους νόμους και να επιδίδονται σε ακραίες συμπεριφορές. Κάποιοι φρόντιζαν τους αρρώστους, ενώ άλλοι εγκατέλειπαν ακόμα και τους συγγενείς τους. Ο Θουκυδίδης αναφέρει ότι η ηθική κατέρρευσε και η Αθήνα δεν ήταν ποτέ η ίδια μετά την πανδημία.</p>
+        <div class="countdown" id="countdown3"></div>
+        <div class="question" id="q3_1" style="display:none;">
+            <p>1. Οι Αθηναίοι έγιναν πιο ευσεβείς κατά τη διάρκεια του λοιμού.</p>
+            <div class="answer-buttons">
+                <button class="incorrect" onclick="checkAnswer('3_1', false)">Σωστό</button>
+                <button class="correct" onclick="checkAnswer('3_1', true)">Λάθος</button>
+            </div>
+        </div>
+        <div class="question" id="q3_2" style="display:none;">
+            <p>2. Η ασθένεια προκάλεσε ανομία και κοινωνική κατάρρευση.</p>
+            <div class="answer-buttons">
+                <button class="correct" onclick="checkAnswer('3_2', true)">Σωστό</button>
+                <button class="incorrect" onclick="checkAnswer('3_2', false)">Λάθος</button>
+            </div>
+        </div>
+        <div class="question" id="q3_3" style="display:none;">
+            <p>3. Όλοι οι πολίτες της Αθήνας φρόντιζαν τους ασθενείς.</p>
+            <div class="answer-buttons">
+                <button class="incorrect" onclick="checkAnswer('3_3', false)">Σωστό</button>
+                <button class="correct" onclick="checkAnswer('3_3', true)">Λάθος</button>
+            </div>
+        </div>
+        <div class="question" id="q3_4" style="display:none;">
+            <p>4. Ο Θουκυδίδης αναφέρει ότι η Αθήνα δεν ανέκαμψε ποτέ πλήρως από τον λοιμό.</p>
+            <div class="answer-buttons">
+                <button class="correct" onclick="checkAnswer('3_4', true)">Σωστό</button>
+                <button class="incorrect" onclick="checkAnswer('3_4', false)">Λάθος</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Στοιχείο 4 -->
+    <div id="quiz4" class="popup">
+        <div class="instructions">📖 Διάβασε προσεκτικά το παρακάτω κείμενο και προσπάθησε να συγκρατήσεις όσες περισσότερες λεπτομέρειες στο χρόνο που σου δίνεται. Μπορείς να κρατάς σημειώσεις! ✍️</div>
+        <p id="text4">Αρχαίοι και σύγχρονοι επιστήμονες προσπάθησαν να εξηγήσουν την ασθένεια που έπληξε την Αθήνα. Σύμφωνα με τις σύγχρονες μελέτες DNA, πιθανή αιτία ήταν ο τυφοειδής πυρετός. Άλλες θεωρίες αναφέρουν ότι μπορεί να επρόκειτο για χολέρα ή ευλογιά. Ο Θουκυδίδης ανέφερε ότι όσοι επιβίωναν δεν ξανααρρώσταιναν, γεγονός που θυμίζει την απόκτηση ανοσίας σε ορισμένες ασθένειες.</p>
+        <div class="countdown" id="countdown4"></div>
+        <div class="question" id="q4_1" style="display:none;">
+            <p>1. Οι επιστήμονες θεωρούν πιθανή αιτία του λοιμού τον τυφοειδή πυρετό.</p>
+            <div class="answer-buttons">
+                <button class="correct" onclick="checkAnswer('4_1', true)">Σωστό</button>
+                <button class="incorrect" onclick="checkAnswer('4_1', false)">Λάθος</button>
+            </div>
+        </div>
+        <div class="question" id="q4_2" style="display:none;">
+            <p>2. Ο Θουκυδίδης δεν ανέφερε τίποτα για όσους επέζησαν.</p>
+            <div class="answer-buttons">
+                <button class="incorrect" onclick="checkAnswer('4_2', false)">Σωστό</button>
+                <button class="correct" onclick="checkAnswer('4_2', true)">Λάθος</button>
+            </div>
+        </div>
+        <div class="question" id="q4_3" style="display:none;">
+            <p>3. Σύμφωνα με τις αρχαίες καταγραφές, η ασθένεια ήταν πιθανότατα ένα είδος πανώλης.</p>
+            <div class="answer-buttons">
+                <button class="incorrect" onclick="checkAnswer('4_3', false)">Σωστό</button>
+                <button class="correct" onclick="checkAnswer('4_3', true)">Λάθος</button>
+            </div>
+        </div>
+        <div class="question" id="q4_4" style="display:none;">
+            <p>4. Οι σύγχρονες ιατρικές αναλύσεις έχουν δώσει οριστική απάντηση για την ασθένεια.</p>
+            <div class="answer-buttons">
+                <button class="incorrect" onclick="checkAnswer('4_4', false)">Σωστό</button>
+                <button class="correct" onclick="checkAnswer('4_4', true)">Λάθος</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Στοιχείο 5 -->
+    <div id="quiz5" class="popup">
+        <div class="instructions">📖 Διάβασε προσεκτικά το παρακάτω κείμενο και προσπάθησε να συγκρατήσεις όσες περισσότερες λεπτομέρειες στο χρόνο που σου δίνεται. Μπορείς να κρατάς σημειώσεις! ✍️</div>
+        <p id="text5">Ο ιστορικός Θουκυδίδης όχι μόνο κατέγραψε τον λοιμό, αλλά και αρρώστησε ο ίδιος. Περιέγραψε με λεπτομέρεια τα συμπτώματα και τις επιπτώσεις της επιδημίας, γεγονός που βοηθά τους σύγχρονους ιστορικούς και ιατρούς να μελετήσουν την πανδημία. Επιβίωσε, αλλά έγραψε ότι πολλοί δεν αναγνώριζαν καν τους φίλους τους μετά την ανάρρωση. Το έργο του αποτελεί μία από τις πιο σημαντικές πηγές για την κατανόηση της αρχαίας πανδημίας.</p>
+        <div class="countdown" id="countdown5"></div>
+        <div class="question" id="q5_1" style="display:none;">
+            <p>1. Ο Θουκυδίδης δεν αρρώστησε ποτέ από τον λοιμό.</p>
+            <div class="answer-buttons">
+                <button class="incorrect" onclick="checkAnswer('5_1', false)">Σωστό</button>
+                <button class="correct" onclick="checkAnswer('5_1', true)">Λάθος</button>
+            </div>
+        </div>
+        <div class="question" id="q5_2" style="display:none;">
+            <p>2. Το έργο του Θουκυδίδη είναι η κύρια πηγή πληροφοριών για τον λοιμό της Αθήνας.</p>
+            <div class="answer-buttons">
+                <button class="correct" onclick="checkAnswer('5_2', true)">Σωστό</button>
+                <button class="incorrect" onclick="checkAnswer('5_2', false)">Λάθος</button>
+            </div>
+        </div>
+        <div class="question" id="q5_3" style="display:none;">
+            <p>3. Ο Θουκυδίδης ανέφερε ότι οι επιζώντες δεν είχαν καμία μόνιμη βλάβη.</p>
+            <div class="answer-buttons">
+                <button class="incorrect" onclick="checkAnswer('5_3', false)">Σωστό</button>
+                <button class="correct" onclick="checkAnswer('5_3', true)">Λάθος</button>
+            </div>
+        </div>
+        <div class="question" id="q5_4" style="display:none;">
+            <p>4. Ο Θουκυδίδης έγραψε για την κοινωνική και πολιτική κρίση που προκάλεσε ο λοιμός.</p>
+            <div class="answer-buttons">
+                <button class="correct" onclick="checkAnswer('5_4', true)">Σωστό</button>
+                <button class="incorrect" onclick="checkAnswer('5_4', false)">Λάθος</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Τελικά μηνύματα -->
     <div id="end" class="popup">
         <img src="end.png" alt="End Image">
         <p style="font-family: 'Comic Sans MS', cursive; font-weight: bold; color: white;">🎉 Λύσατε το μυστήριο και γλυτώσατε το θάνατο! 🎉</p>
@@ -198,7 +374,8 @@
                 if (timeLeft <= 0) {
                     clearInterval(countdownInterval);
                     countdownElement.textContent = '';
-                    document.getElementById('q' + quizNumber + '_1').style.display = 'block';
+                    document.getElementById('text' + quizNumber).style.display = 'none'; // Εξαφάνιση κειμένου
+                    document.getElementById('q' + quizNumber + '_1').style.display = 'block'; // Εμφάνιση πρώτης ερώτησης
                 }
             }, 1000);
         }
@@ -222,9 +399,6 @@
                     nextQuestion.style.display = 'block';
                 } else {
                     closePopup('quiz' + questionId.split('_')[0]);
-                    if (answeredQuestions === totalQuestions) {
-                        showFinalMessage();
-                    }
                 }
             }, 1000);
         }
