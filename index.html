@@ -1,1 +1,169 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ο Λοιμός της Αρχαίας Αθήνας</title>
+    <style>
+        body {
+            background-image: url('background-soft.png');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            font-size: 14px;
+        }
+        h1 {
+            font-size: 36px;
+            margin-top: 20px;
+        }
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .popup img {
+            max-width: 100%;
+            height: auto;
+        }
+        .scoreboard {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .question {
+            margin: 10px 0;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Δημιουργία: Παναγιώτης Δόμβρος 2025 (CC BY-NC)
+    </header>
+    <h1>Ο Λοιμός της Αρχαίας Αθήνας</h1>
 
+    <button class="button" onclick="showPopup('intro')">Αποστολή</button>
+    <button class="button" onclick="startQuiz('1')">Στοιχείο 1</button>
+    <button class="button" onclick="startQuiz('2')">Στοιχείο 2</button>
+    <button class="button" onclick="startQuiz('3')">Στοιχείο 3</button>
+    <button class="button" onclick="startQuiz('4')">Στοιχείο 4</button>
+    <button class="button" onclick="startQuiz('5')">Στοιχείο 5</button>
+
+    <div class="scoreboard" id="scoreboard">Σκορ: 0</div>
+
+    <div id="intro" class="popup">
+        <p>Ο λοιμός έχει πλήξει την Αθήνα! Είστε μια ομάδα ερευνητών που στάλθηκε πίσω στον χρόνο για να λύσει το μυστήριο. Μπορείτε να ανακαλύψετε την αιτία της επιδημίας και να εξηγήσετε τις επιπτώσεις της; Συνεργαστείτε, αναλύστε τα στοιχεία και αποδείξτε τις ικανότητές σας ως οι καλύτεροι ιστορικοί ντετέκτιβ!</p>
+        <button onclick="closePopup('intro')">Κλείσιμο</button>
+    </div>
+
+    <div id="quiz1" class="popup">
+        <p>Ο Λοιμός της Αθήνας ξέσπασε το 430 π.Χ., κατά τη διάρκεια του Πελοποννησιακού Πολέμου, και προκάλεσε τον θάνατο χιλιάδων κατοίκων. Σύμφωνα με τον ιστορικό Θουκυδίδη, η ασθένεια προήλθε από την Αφρική και εξαπλώθηκε γρήγορα λόγω του συνωστισμού στην πόλη. Οι Σπαρτιάτες, βλέποντας την καταστροφή, αποφάσισαν να μην πλησιάσουν. Ο ίδιος ο Περικλής, ο μεγάλος ηγέτης της Αθήνας, υπέκυψε στον λοιμό. Η πόλη βίωσε μεγάλη κοινωνική και πολιτική κρίση λόγω της απώλειας σημαντικών πολιτών.</p>
+        <div class="question" id="q1_1">
+            <p>1. Ο Λοιμός της Αθήνας ξέσπασε μετά το τέλος του Πελοποννησιακού Πολέμου.</p>
+            <button onclick="checkAnswer('1_1', false)">Λάθος</button>
+        </div>
+        <div class="question" id="q1_2" style="display:none;">
+            <p>2. Ο Θουκυδίδης κατέγραψε λεπτομερώς τα συμπτώματα της ασθένειας.</p>
+            <button onclick="checkAnswer('1_2', true)">Σωστό</button>
+        </div>
+        <div class="question" id="q1_3" style="display:none;">
+            <p>3. Ο Περικλής επέζησε του λοιμού και ηγήθηκε της Αθήνας για πολλά χρόνια μετά.</p>
+            <button onclick="checkAnswer('1_3', false)">Λάθος</button>
+        </div>
+        <div class="question" id="q1_4" style="display:none;">
+            <p>4. Οι Σπαρτιάτες δεν μπήκαν στην Αθήνα λόγω του φόβου της ασθένειας.</p>
+            <button onclick="checkAnswer('1_4', true)">Σωστό</button>
+        </div>
+    </div>
+
+    <!-- Repeat similar structure for quiz2, quiz3, quiz4, quiz5 -->
+
+    <div id="end" class="popup">
+        <img src="end.png" alt="End Image">
+        <p style="font-family: 'Comic Sans MS', cursive; font-weight: bold; color: white;">Λύσατε το μυστήριο και γλυτώσατε το θάνατο!</p>
+    </div>
+
+    <div id="fail" class="popup">
+        <p style="font-family: 'Comic Sans MS', cursive; font-weight: bold; color: red;">Δυστυχώς αποτύχατε! Είστε καταδικασμένοι/ες σε θάνατο!</p>
+    </div>
+
+    <script>
+        let score = 0;
+        const scoreboard = document.getElementById('scoreboard');
+
+        function showPopup(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function closePopup(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        function startQuiz(quizNumber) {
+            showPopup('quiz' + quizNumber);
+            setTimeout(() => {
+                document.getElementById('q' + quizNumber + '_1').style.display = 'block';
+            }, 100);
+        }
+
+        function checkAnswer(questionId, isCorrect) {
+            const question = document.getElementById('q' + questionId);
+            if (isCorrect) {
+                score += 1;
+                question.innerHTML += ' <span class="correct">✓</span>';
+            } else {
+                question.innerHTML += ' <span class="incorrect">✗</span>';
+            }
+            scoreboard.textContent = 'Σκορ: ' + score;
+            setTimeout(() => {
+                question.style.display = 'none';
+                const nextQuestion = document.getElementById('q' + questionId.replace(/_(\d+)/, '_' + (parseInt(questionId.split('_')[1]) + 1)));
+                if (nextQuestion) {
+                    nextQuestion.style.display = 'block';
+                } else {
+                    closePopup('quiz' + questionId.split('_')[0]);
+                    if (score > 10) {
+                        showPopup('end');
+                    } else {
+                        showPopup('fail');
+                    }
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
